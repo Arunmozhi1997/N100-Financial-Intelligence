@@ -1,0 +1,72 @@
+rule,table,status,issue
+DQ-01,companies,FAIL,"{'company_logo': 10, 'chart_link': 9, 'about_company': 9, 'website': 10, 'nse_profile': 10, 'bse_profile': 10, 'face_value': 10, 'book_value': 10, 'roce_percentage': 10, 'roe_percentage': 11}"
+DQ-02,companies,PASS,0 duplicate rows
+DQ-03,companies,PASS,
+DQ-06,companies,PASS,
+DQ-07,companies,PASS,
+DQ-01,profitandloss,FAIL,"{'year': 103, 'operating_profit': 13, 'opm_percentage': 15, 'tax_percentage': 95, 'eps': 5, 'dividend_payout': 103}"
+DQ-02,profitandloss,PASS,0 duplicate rows
+DQ-03,profitandloss,PASS,
+DQ-04,profitandloss,PASS,0 invalid company IDs
+DQ-06,profitandloss,PASS,
+DQ-07,profitandloss,PASS,
+DQ-01,balancesheet,FAIL,{'year': 5}
+DQ-02,balancesheet,PASS,0 duplicate rows
+DQ-03,balancesheet,PASS,
+DQ-04,balancesheet,PASS,0 invalid company IDs
+DQ-06,balancesheet,PASS,
+DQ-07,balancesheet,PASS,
+DQ-01,cashflow,FAIL,"{'operating_activity': 2, 'investing_activity': 2, 'financing_activity': 2, 'net_cash_flow': 2}"
+DQ-02,cashflow,PASS,0 duplicate rows
+DQ-03,cashflow,PASS,
+DQ-04,cashflow,PASS,0 invalid company IDs
+DQ-06,cashflow,PASS,
+DQ-07,cashflow,PASS,
+DQ-01,analysis,PASS,
+DQ-02,analysis,PASS,0 duplicate rows
+DQ-03,analysis,PASS,
+DQ-04,analysis,PASS,0 invalid company IDs
+DQ-06,analysis,PASS,
+DQ-07,analysis,PASS,
+DQ-01,documents,FAIL,{'annual_report': 52}
+DQ-02,documents,PASS,0 duplicate rows
+DQ-03,documents,PASS,
+DQ-04,documents,PASS,0 invalid company IDs
+DQ-06,documents,PASS,
+DQ-07,documents,PASS,
+DQ-01,prosandcons,FAIL,"{'pros': 5, 'cons': 1}"
+DQ-02,prosandcons,PASS,0 duplicate rows
+DQ-03,prosandcons,PASS,
+DQ-04,prosandcons,PASS,0 invalid company IDs
+DQ-06,prosandcons,PASS,
+DQ-07,prosandcons,PASS,
+DQ-01,sectors,PASS,
+DQ-02,sectors,PASS,0 duplicate rows
+DQ-03,sectors,PASS,
+DQ-04,sectors,PASS,0 invalid company IDs
+DQ-06,sectors,PASS,
+DQ-07,sectors,PASS,
+DQ-01,stock_prices,PASS,
+DQ-02,stock_prices,PASS,0 duplicate rows
+DQ-03,stock_prices,PASS,
+DQ-04,stock_prices,PASS,0 invalid company IDs
+DQ-06,stock_prices,PASS,
+DQ-07,stock_prices,PASS,
+DQ-01,financial_ratios,FAIL,"{'net_profit_margin_pct': 1, 'operating_profit_margin_pct': 61, 'interest_coverage': 93, 'asset_turnover': 1, 'free_cash_flow_cr': 2, 'capex_cr': 2, 'earnings_per_share': 4, 'dividend_payout_ratio_pct': 4, 'cash_from_operations_cr': 2}"
+DQ-02,financial_ratios,PASS,0 duplicate rows
+DQ-03,financial_ratios,PASS,
+DQ-04,financial_ratios,PASS,0 invalid company IDs
+DQ-06,financial_ratios,PASS,
+DQ-07,financial_ratios,PASS,
+DQ-01,market_cap,PASS,
+DQ-02,market_cap,PASS,0 duplicate rows
+DQ-03,market_cap,PASS,
+DQ-04,market_cap,PASS,0 invalid company IDs
+DQ-06,market_cap,PASS,
+DQ-07,market_cap,PASS,
+DQ-01,peer_groups,PASS,
+DQ-02,peer_groups,PASS,0 duplicate rows
+DQ-03,peer_groups,PASS,
+DQ-04,peer_groups,PASS,0 invalid company IDs
+DQ-06,peer_groups,PASS,
+DQ-07,peer_groups,PASS,
