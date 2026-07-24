@@ -4,13 +4,13 @@ DQ-02,companies,PASS,0 duplicate rows
 DQ-03,companies,PASS,
 DQ-06,companies,PASS,
 DQ-07,companies,PASS,
-DQ-01,profitandloss,FAIL,"{'year': 103, 'operating_profit': 13, 'opm_percentage': 15, 'tax_percentage': 95, 'eps': 5, 'dividend_payout': 103}"
+DQ-01,profitandloss,FAIL,"{'year': 103, 'operating_profit': 13, 'opm_percentage': 15, 'tax_percentage': 95, 'eps': 4, 'dividend_payout': 103}"
 DQ-02,profitandloss,PASS,0 duplicate rows
 DQ-03,profitandloss,PASS,
 DQ-04,profitandloss,PASS,0 invalid company IDs
 DQ-06,profitandloss,PASS,
 DQ-07,profitandloss,PASS,
-DQ-01,balancesheet,FAIL,{'year': 5}
+DQ-01,balancesheet,PASS,
 DQ-02,balancesheet,PASS,0 duplicate rows
 DQ-03,balancesheet,PASS,
 DQ-04,balancesheet,PASS,0 invalid company IDs
@@ -52,7 +52,7 @@ DQ-03,stock_prices,PASS,
 DQ-04,stock_prices,PASS,0 invalid company IDs
 DQ-06,stock_prices,PASS,
 DQ-07,stock_prices,PASS,
-DQ-01,financial_ratios,FAIL,"{'net_profit_margin_pct': 1, 'operating_profit_margin_pct': 61, 'interest_coverage': 93, 'asset_turnover': 1, 'free_cash_flow_cr': 2, 'capex_cr': 2, 'earnings_per_share': 4, 'dividend_payout_ratio_pct': 4, 'cash_from_operations_cr': 2}"
+DQ-01,financial_ratios,FAIL,"{'net_profit_margin_pct': 1, 'operating_profit_margin_pct': 61, 'interest_coverage': 93, 'asset_turnover': 1, 'free_cash_flow_cr': 2, 'capex_cr': 2, 'earnings_per_share': 3, 'dividend_payout_ratio_pct': 4, 'cash_from_operations_cr': 2}"
 DQ-02,financial_ratios,PASS,0 duplicate rows
 DQ-03,financial_ratios,PASS,
 DQ-04,financial_ratios,PASS,0 invalid company IDs

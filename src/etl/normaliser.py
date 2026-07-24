@@ -42,33 +42,79 @@ def remove_duplicates(df: pd.DataFrame) -> pd.DataFrame:
 def normalize_year(value):
     """
     Normalize year values.
+    Converts:
+    2024.0 -> 2024
+    "2024.0" -> 2024
+    "FY2024" -> 2024
+    "24" -> 2024
     """
 
     if pd.isna(value):
         return None
 
+
+    # Handle numeric values
     if isinstance(value, (int, float)):
-        year = int(value)
+
+        year = int(float(value))
+
         if 1900 <= year <= 2100:
             return year
+
         return None
 
+
+
     value = str(value).strip()
+
 
     if value == "":
         return None
 
-    digits = "".join(ch for ch in value if ch.isdigit())
+
+
+    # Remove decimal values like 2024.0
+
+    if "." in value:
+
+        try:
+            value = str(int(float(value)))
+
+        except ValueError:
+            pass
+
+
+
+    # Extract digits
+
+    digits = "".join(
+        ch for ch in value
+        if ch.isdigit()
+    )
+
+
 
     if len(digits) == 4:
-        return int(digits)
+
+        year = int(digits)
+
+        if 1900 <= year <= 2100:
+            return year
+
+
 
     if len(digits) == 2:
+
         year = int(digits)
-        return 2000 + year if year < 50 else 1900 + year
+
+        return (
+            2000 + year
+            if year < 50
+            else 1900 + year
+        )
+
 
     return None
-
 
 def normalize_ticker(value):
     """

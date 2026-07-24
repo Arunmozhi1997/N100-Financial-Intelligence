@@ -1,0 +1,28 @@
+quality_compounder:
+  roe_min: 15
+  debt_to_equity_max: 1
+  free_cash_flow_min: 0
+
+value_pick:
+  roe_min: 10
+  debt_to_equity_max: 2
+  free_cash_flow_min: 0
+
+growth_accelerator:
+  roe_min: 18
+  debt_to_equity_max: 2
+  operating_profit_margin_min: 15
+
+dividend_champion:
+  free_cash_flow_min: 0
+  debt_to_equity_max: 2
+
+debt_free_blue_chip:
+  debt_to_equity_max: 0
+  roe_min: 12
+  asset_turnover_min: 1
+
+turnaround_watch:
+  free_cash_flow_min: 0
+  operating_profit_margin_min: 5
+  interest_coverage_min: 2

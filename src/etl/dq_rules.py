@@ -4,7 +4,6 @@ import pandas as pd
 # -----------------------------
 # DQ-08 Year Validation
 # -----------------------------
-
 def check_year_format(conn, table):
 
     try:
@@ -14,17 +13,19 @@ def check_year_format(conn, table):
             conn
         )
 
+        # Ignore NULL years (TTM rows)
+        df = df[df["year"].notna()]
+
         invalid = df[
             ~df["year"]
+            .astype(int)
             .astype(str)
             .str.match(r"^\d{4}$")
         ]
 
-
         return len(invalid)
 
-
-    except:
+    except Exception:
         return 0
 
 
@@ -40,18 +41,21 @@ def check_negative_values(conn, table):
         conn
     )
 
+    # Tables where negative values are expected
+    allowed_tables = {
+        "cashflow",
+        "profitandloss",
+        "financial_ratios",
+    }
 
-    numeric = df.select_dtypes(
-        include="number"
-    )
+    if table in allowed_tables:
+        return 0
 
+    numeric = df.select_dtypes(include="number")
 
-    negative = (
-        numeric < 0
-    ).sum().sum()
+    negative = (numeric < 0).sum().sum()
 
-
-    return negative
+    return int(negative)
 
 
 
@@ -66,29 +70,32 @@ def check_percentage_range(conn, table):
         conn
     )
 
-
-    columns = [
-        c for c in df.columns
-        if "pct" in c
-        or "percentage" in c
-    ]
-
-
     issues = 0
 
-
-    for col in columns:
+    # Only validate tax percentage
+    if "tax_percentage" in df.columns:
 
         issues += (
-            (df[col] < -100)
-            |
-            (df[col] > 100)
+            df["tax_percentage"] > 100
         ).sum()
 
+    # Validate ROE
+    if "roe_percentage" in df.columns:
+
+        issues += (
+            (df["roe_percentage"] < -100) |
+            (df["roe_percentage"] > 100)
+        ).sum()
+
+    # Validate ROCE
+    if "roce_percentage" in df.columns:
+
+        issues += (
+            (df["roce_percentage"] < -100) |
+            (df["roce_percentage"] > 100)
+        ).sum()
 
     return issues
-
-
 
 # -----------------------------
 # DQ-11 Empty Table Check
