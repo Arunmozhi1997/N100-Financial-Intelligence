@@ -5,16 +5,34 @@ def calculate_cagr(start_value, end_value, years):
     """
     Calculate Compound Annual Growth Rate (CAGR).
 
-    Returns:
-        tuple -> (cagr_value, flag)
+    Parameters
+    ----------
+    start_value : float
+        Starting value.
+    end_value : float
+        Ending value.
+    years : int
+        Number of years.
 
-    Flags:
-        None
-        ZERO_BASE
-        TURNAROUND
-        DECLINE_TO_LOSS
-        BOTH_NEGATIVE
-        INSUFFICIENT
+    Returns
+    -------
+    tuple
+        (cagr_value, flag)
+
+    Flags
+    -----
+    None
+        Valid CAGR calculated.
+    ZERO_BASE
+        Starting value is zero.
+    TURNAROUND
+        Company moved from loss to profit.
+    DECLINE_TO_LOSS
+        Company moved from profit to loss.
+    BOTH_NEGATIVE
+        Both start and end values are negative.
+    INSUFFICIENT
+        Invalid number of years.
     """
 
     if years <= 0:
@@ -34,7 +52,7 @@ def calculate_cagr(start_value, end_value, years):
 
     cagr = (pow(end_value / start_value, 1 / years) - 1) * 100
 
-    return cagr, None
+    return round(cagr, 2), None
 
 
 def revenue_cagr(start_revenue, end_revenue, years):
@@ -46,21 +64,21 @@ def revenue_cagr(start_revenue, end_revenue, years):
 
 def pat_cagr(start_pat, end_pat, years):
     """
-    Calculate PAT CAGR.
+    Calculate Profit After Tax (PAT) CAGR.
     """
     return calculate_cagr(start_pat, end_pat, years)
 
 
 def eps_cagr(start_eps, end_eps, years):
     """
-    Calculate EPS CAGR.
+    Calculate Earnings Per Share (EPS) CAGR.
     """
     return calculate_cagr(start_eps, end_eps, years)
 
 
 def calculate_cagr_for_window(values, years):
     """
-    Calculate CAGR for the last N years.
+    Calculate CAGR using the last N years of historical values.
 
     Parameters
     ----------
@@ -75,7 +93,7 @@ def calculate_cagr_for_window(values, years):
         (cagr_value, flag)
     """
 
-    # Need at least (years + 1) data points
+    # Need at least (years + 1) values
     if len(values) < years + 1:
         return None, "INSUFFICIENT"
 

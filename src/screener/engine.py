@@ -29,9 +29,47 @@ financial_df = pd.read_sql(
     conn,
 )
 
+financial_df["year"] = (
+    pd.to_numeric(financial_df["year"], errors="coerce")
+    .fillna(0)
+    .astype(int)
+)
+
 companies_df = pd.read_sql(
     "SELECT * FROM companies",
     conn,
+)
+
+market_df = pd.read_sql(
+    "SELECT * FROM market_cap",
+    conn,
+)
+
+market_df["year"] = (
+    pd.to_numeric(market_df["year"], errors="coerce")
+    .fillna(0)
+    .astype(int)
+)
+
+analysis_df = pd.read_sql(
+    "SELECT * FROM analysis",
+    conn,
+)
+
+profit_df = pd.read_sql(
+    """
+    SELECT
+        company_id,
+        year,
+        sales
+    FROM profitandloss
+    """,
+    conn,
+)
+profit_df["year"] = (
+    pd.to_numeric(profit_df["year"], errors="coerce")
+    .fillna(0)
+    .astype(int)
 )
 
 # ==========================================
@@ -48,8 +86,43 @@ financial_df = financial_df.merge(
     how="left",
 )
 
+analysis_df = analysis_df.drop_duplicates(subset=["company_id"])
+
 print("\nAfter Company Merge")
 print(financial_df.shape)
+
+financial_df = financial_df.merge(
+    market_df,
+    on=["company_id", "year"],
+    how="left",
+)
+
+print("\nAfter Market Cap Merge")
+print(financial_df.shape)
+
+financial_df = financial_df.merge(
+    analysis_df,
+    on="company_id",
+    how="left",
+)
+
+print("\nAfter Analysis Merge")
+print(financial_df.shape)
+
+profit_df = profit_df.drop_duplicates(
+    subset=["company_id", "year"]
+)
+
+financial_df = financial_df.merge(
+    profit_df,
+    on=["company_id", "year"],
+    how="left",
+)
+
+print("\nAfter Profit Merge")
+print(financial_df.shape)
+
+
 
 # ==========================================
 # Load YAML Config
@@ -320,6 +393,27 @@ for title, config_key, output_file in SCREENERS:
         config_key,
         output_file,
     )
+
+# ==========================================
+# Create Combined Excel Workbook
+# ==========================================
+
+combined_file = OUTPUT_DIR / "screener_output.xlsx"
+
+with pd.ExcelWriter(combined_file, engine="openpyxl") as writer:
+
+    for title, config_key, output_file in SCREENERS:
+
+        sheet_name = title[:31]
+
+        results[config_key].to_excel(
+            writer,
+            sheet_name=sheet_name,
+            index=False,
+        )
+
+print("\nCombined Screener Workbook Saved:")
+print(combined_file)
 
 # Close database connection
 conn.close()
