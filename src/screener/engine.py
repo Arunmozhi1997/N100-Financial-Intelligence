@@ -30,9 +30,7 @@ financial_df = pd.read_sql(
 )
 
 financial_df["year"] = (
-    pd.to_numeric(financial_df["year"], errors="coerce")
-    .fillna(0)
-    .astype(int)
+    pd.to_numeric(financial_df["year"], errors="coerce").fillna(0).astype(int)
 )
 
 companies_df = pd.read_sql(
@@ -46,9 +44,7 @@ market_df = pd.read_sql(
 )
 
 market_df["year"] = (
-    pd.to_numeric(market_df["year"], errors="coerce")
-    .fillna(0)
-    .astype(int)
+    pd.to_numeric(market_df["year"], errors="coerce").fillna(0).astype(int)
 )
 
 analysis_df = pd.read_sql(
@@ -67,18 +63,14 @@ profit_df = pd.read_sql(
     conn,
 )
 profit_df["year"] = (
-    pd.to_numeric(profit_df["year"], errors="coerce")
-    .fillna(0)
-    .astype(int)
+    pd.to_numeric(profit_df["year"], errors="coerce").fillna(0).astype(int)
 )
 
 # ==========================================
 # Merge Company Information
 # ==========================================
 
-companies_df = companies_df.rename(
-    columns={"id": "company_id"}
-)
+companies_df = companies_df.rename(columns={"id": "company_id"})
 
 financial_df = financial_df.merge(
     companies_df,
@@ -109,9 +101,7 @@ financial_df = financial_df.merge(
 print("\nAfter Analysis Merge")
 print(financial_df.shape)
 
-profit_df = profit_df.drop_duplicates(
-    subset=["company_id", "year"]
-)
+profit_df = profit_df.drop_duplicates(subset=["company_id", "year"])
 
 financial_df = financial_df.merge(
     profit_df,
@@ -121,7 +111,6 @@ financial_df = financial_df.merge(
 
 print("\nAfter Profit Merge")
 print(financial_df.shape)
-
 
 
 # ==========================================
@@ -158,36 +147,22 @@ print(config)
 # Generic Screener Function
 # ==========================================
 
+
 def apply_filters(df, settings):
 
     result = df.copy()
 
     # ROE
-    if (
-        "roe_min" in settings
-        and "return_on_equity_pct" in result.columns
-    ):
-        result = result[
-            result["return_on_equity_pct"] >= settings["roe_min"]
-        ]
+    if "roe_min" in settings and "return_on_equity_pct" in result.columns:
+        result = result[result["return_on_equity_pct"] >= settings["roe_min"]]
 
     # Debt to Equity
-    if (
-        "debt_to_equity_max" in settings
-        and "debt_to_equity" in result.columns
-    ):
-        result = result[
-            result["debt_to_equity"] <= settings["debt_to_equity_max"]
-        ]
+    if "debt_to_equity_max" in settings and "debt_to_equity" in result.columns:
+        result = result[result["debt_to_equity"] <= settings["debt_to_equity_max"]]
 
     # Free Cash Flow
-    if (
-        "free_cash_flow_min" in settings
-        and "free_cash_flow_cr" in result.columns
-    ):
-        result = result[
-            result["free_cash_flow_cr"] >= settings["free_cash_flow_min"]
-        ]
+    if "free_cash_flow_min" in settings and "free_cash_flow_cr" in result.columns:
+        result = result[result["free_cash_flow_cr"] >= settings["free_cash_flow_min"]]
 
     # Operating Profit Margin
     if (
@@ -200,34 +175,18 @@ def apply_filters(df, settings):
         ]
 
     # Interest Coverage
-    if (
-        "interest_coverage_min" in settings
-        and "interest_coverage" in result.columns
-    ):
+    if "interest_coverage_min" in settings and "interest_coverage" in result.columns:
         result = result[
-            result["interest_coverage"]
-            >= settings["interest_coverage_min"]
+            result["interest_coverage"] >= settings["interest_coverage_min"]
         ]
 
     # Asset Turnover
-    if (
-        "asset_turnover_min" in settings
-        and "asset_turnover" in result.columns
-    ):
-        result = result[
-            result["asset_turnover"]
-            >= settings["asset_turnover_min"]
-        ]
+    if "asset_turnover_min" in settings and "asset_turnover" in result.columns:
+        result = result[result["asset_turnover"] >= settings["asset_turnover_min"]]
 
     # Revenue CAGR
-    if (
-        "revenue_cagr_5yr_min" in settings
-        and "revenue_cagr_5yr" in result.columns
-    ):
-        result = result[
-            result["revenue_cagr_5yr"]
-            >= settings["revenue_cagr_5yr_min"]
-        ]
+    if "revenue_cagr_5yr_min" in settings and "revenue_cagr_5yr" in result.columns:
+        result = result[result["revenue_cagr_5yr"] >= settings["revenue_cagr_5yr_min"]]
 
     return result
 
@@ -235,6 +194,7 @@ def apply_filters(df, settings):
 # ==========================================
 # Composite Quality Score
 # ==========================================
+
 
 def add_composite_score(df):
 
@@ -250,39 +210,33 @@ def add_composite_score(df):
     ]
 
     for col in score_columns:
-       result[col] = result[col].fillna(0)
+        result[col] = result[col].fillna(0)
 
     # Normalize each metric (0-100)
     result["roe_score"] = (
-        result["return_on_equity_pct"]
-        / result["return_on_equity_pct"].max()
+        result["return_on_equity_pct"] / result["return_on_equity_pct"].max()
     ) * 100
 
     result["npm_score"] = (
-        result["net_profit_margin_pct"]
-        / result["net_profit_margin_pct"].max()
+        result["net_profit_margin_pct"] / result["net_profit_margin_pct"].max()
     ) * 100
 
     result["fcf_score"] = (
-        result["free_cash_flow_cr"]
-        / result["free_cash_flow_cr"].max()
+        result["free_cash_flow_cr"] / result["free_cash_flow_cr"].max()
     ) * 100
 
     result["asset_score"] = (
-        result["asset_turnover"]
-        / result["asset_turnover"].max()
+        result["asset_turnover"] / result["asset_turnover"].max()
     ) * 100
 
     # Lower Debt-to-Equity is better
-   # Lower Debt-to-Equity is better
+    # Lower Debt-to-Equity is better
     max_de = result["debt_to_equity"].max()
 
     if max_de == 0:
         result["de_score"] = 100
     else:
-        result["de_score"] = (
-            1 - (result["debt_to_equity"] / max_de)
-        ) * 100
+        result["de_score"] = (1 - (result["debt_to_equity"] / max_de)) * 100
 
     # Weighted Composite Score
     result["composite_quality_score"] = (
@@ -299,6 +253,7 @@ def add_composite_score(df):
 # ==========================================
 # Run Screener
 # ==========================================
+
 
 def run_screener(title, config_key, output_file):
 

@@ -6,9 +6,7 @@ DB_PATH = BASE_DIR / "db" / "nifty100.db"
 
 conn = sqlite3.connect(DB_PATH)
 
-result = conn.execute(
-    "PRAGMA foreign_key_check;"
-).fetchall()
+result = conn.execute("PRAGMA foreign_key_check;").fetchall()
 
 print("\nForeign Key Check")
 print("=" * 50)

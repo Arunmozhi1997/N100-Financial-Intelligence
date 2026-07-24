@@ -12,6 +12,7 @@ def free_cash_flow(operating_activity, investing_activity):
 
     return operating_activity + investing_activity
 
+
 def cfo_quality_score(cfo, pat):
     """
     Calculate CFO Quality Score.

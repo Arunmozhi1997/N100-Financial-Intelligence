@@ -6,6 +6,7 @@ from src.analytics.cagr import (
     eps_cagr,
 )
 
+
 def test_calculate_cagr():
     value, flag = calculate_cagr(100, 200, 5)
 

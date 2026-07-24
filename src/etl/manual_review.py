@@ -59,6 +59,6 @@ ORDER BY total_years;
 
 result = pd.read_sql_query(query, conn)
 
-print(result)    
+print(result)
 
 conn.close()

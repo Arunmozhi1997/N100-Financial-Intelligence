@@ -8,6 +8,7 @@ from src.analytics.ratios import (
     asset_turnover,
 )
 
+
 def test_debt_to_equity():
     assert debt_to_equity(200, 100, 300) == 0.5
 

@@ -16,7 +16,7 @@ tables = [
     "stock_prices",
     "financial_ratios",
     "market_cap",
-    "peer_groups"
+    "peer_groups",
 ]
 
 print("Database:", DB_PATH)

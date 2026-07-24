@@ -68,12 +68,7 @@ print(companies_df.columns.tolist())
 # ==========================================
 
 for df in [profit_df, balance_df, cashflow_df]:
-    df["company_id"] = (
-        df["company_id"]
-        .astype(str)
-        .str.strip()
-        .str.upper()
-    )
+    df["company_id"] = df["company_id"].astype(str).str.strip().str.upper()
 
     df["year"] = pd.to_numeric(df["year"], errors="coerce")
     df.dropna(subset=["year"], inplace=True)
@@ -137,20 +132,11 @@ print("Cash Flow     :", cashflow_df["company_id"].nunique())
 # Remove Duplicate Company-Year Records
 # ==========================================
 
-profit_df = profit_df.drop_duplicates(
-    subset=["company_id", "year"],
-    keep="first"
-)
+profit_df = profit_df.drop_duplicates(subset=["company_id", "year"], keep="first")
 
-balance_df = balance_df.drop_duplicates(
-    subset=["company_id", "year"],
-    keep="first"
-)
+balance_df = balance_df.drop_duplicates(subset=["company_id", "year"], keep="first")
 
-cashflow_df = cashflow_df.drop_duplicates(
-    subset=["company_id", "year"],
-    keep="first"
-)
+cashflow_df = cashflow_df.drop_duplicates(subset=["company_id", "year"], keep="first")
 
 print("\nAfter Removing Duplicates")
 print("Profit :", profit_df.shape)
@@ -208,31 +194,22 @@ print(cashflow_df[cashflow_df["company_id"] == "TCS"].head())
 # Merge Tables
 # ==========================================
 
-financial_df = (
-    profit_df
-    .merge(
-        balance_df,
-        on=["company_id", "year"],
-        how="inner",
-        suffixes=("_pl", "_bs"),
-    )
-    .merge(
-        cashflow_df,
-        on=["company_id", "year"],
-        how="inner",
-    )
+financial_df = profit_df.merge(
+    balance_df,
+    on=["company_id", "year"],
+    how="inner",
+    suffixes=("_pl", "_bs"),
+).merge(
+    cashflow_df,
+    on=["company_id", "year"],
+    how="inner",
 )
 
 # ==========================================
 # Merge Company Master
 # ==========================================
 
-companies_df["id"] = (
-    companies_df["id"]
-    .astype(str)
-    .str.strip()
-    .str.upper()
-)
+companies_df["id"] = companies_df["id"].astype(str).str.strip().str.upper()
 
 financial_df = financial_df.merge(
     companies_df,
@@ -249,12 +226,8 @@ print(financial_df.shape)
 # ==========================================
 
 financial_df["computed_roce"] = (
-    (
-        financial_df["operating_profit"]
-        + financial_df["other_income"]
-    )
-    /
-    (
+    (financial_df["operating_profit"] + financial_df["other_income"])
+    / (
         financial_df["equity_capital"]
         + financial_df["reserves"]
         + financial_df["borrowings"]
@@ -262,13 +235,10 @@ financial_df["computed_roce"] = (
 ) * 100
 
 financial_df["roce_difference"] = (
-    financial_df["computed_roce"]
-    - financial_df["roce_percentage"]
+    financial_df["computed_roce"] - financial_df["roce_percentage"]
 ).abs()
 
-anomalies = financial_df[
-    financial_df["roce_difference"] > 5
-]
+anomalies = financial_df[financial_df["roce_difference"] > 5]
 
 print("\nROCE anomalies:", len(anomalies))
 
@@ -288,21 +258,14 @@ for _, row in anomalies.iterrows():
 
 financial_df["computed_roe"] = (
     financial_df["net_profit"]
-    /
-    (
-        financial_df["equity_capital"]
-        + financial_df["reserves"]
-    )
+    / (financial_df["equity_capital"] + financial_df["reserves"])
 ) * 100
 
 financial_df["roe_difference"] = (
-    financial_df["computed_roe"]
-    - financial_df["roe_percentage"]
+    financial_df["computed_roe"] - financial_df["roe_percentage"]
 ).abs()
 
-roe_anomalies = financial_df[
-    financial_df["roe_difference"] > 5
-]
+roe_anomalies = financial_df[financial_df["roe_difference"] > 5]
 
 print("\nROE anomalies:", len(roe_anomalies))
 
@@ -392,34 +355,29 @@ for _, row in financial_df.iterrows():
         row["operating_profit"],
     )
 
-    results.append({
-    "company_id": row["company_id"],
-    "year": row["year"],
-
-    "net_profit_margin_pct": npm,
-    "operating_profit_margin_pct": opm,
-    "return_on_equity_pct": roe,
-
-    "debt_to_equity": debt_equity,
-    "interest_coverage": icr,
-    "asset_turnover": asset_turn,
-
-    "free_cash_flow_cr": fcf,
-
-    "capex_cr": abs(row["investing_activity"]),
-
-    "earnings_per_share": row["eps"],
-
-    "book_value_per_share":
-        (row["equity_capital"] + row["reserves"]) / row["equity_capital"]
-        if row["equity_capital"] != 0 else None,
-
-    "dividend_payout_ratio_pct": row["dividend_payout"],
-
-    "total_debt_cr": row["borrowings"],
-
-    "cash_from_operations_cr": row["operating_activity"],
-})
+    results.append(
+        {
+            "company_id": row["company_id"],
+            "year": row["year"],
+            "net_profit_margin_pct": npm,
+            "operating_profit_margin_pct": opm,
+            "return_on_equity_pct": roe,
+            "debt_to_equity": debt_equity,
+            "interest_coverage": icr,
+            "asset_turnover": asset_turn,
+            "free_cash_flow_cr": fcf,
+            "capex_cr": abs(row["investing_activity"]),
+            "earnings_per_share": row["eps"],
+            "book_value_per_share": (
+                (row["equity_capital"] + row["reserves"]) / row["equity_capital"]
+                if row["equity_capital"] != 0
+                else None
+            ),
+            "dividend_payout_ratio_pct": row["dividend_payout"],
+            "total_debt_cr": row["borrowings"],
+            "cash_from_operations_cr": row["operating_activity"],
+        }
+    )
 
 ratio_df = pd.DataFrame(results)
 
@@ -467,4 +425,3 @@ print("Rows inserted:", len(ratio_df))
 
 conn.commit()
 conn.close()
-

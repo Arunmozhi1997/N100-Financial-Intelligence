@@ -37,10 +37,7 @@ screeners = {
     "Turnaround Watch": "turnaround_watch.xlsx",
 }
 
-selected = st.sidebar.selectbox(
-    "Select Screener",
-    list(screeners.keys())
-)
+selected = st.sidebar.selectbox("Select Screener", list(screeners.keys()))
 
 file = OUTPUT_DIR / screeners[selected]
 
@@ -59,16 +56,10 @@ df = pd.read_excel(file)
 st.sidebar.header("Filters")
 
 years = sorted(df["year"].dropna().unique().tolist())
-selected_year = st.sidebar.selectbox(
-    "Year",
-    ["All"] + years
-)
+selected_year = st.sidebar.selectbox("Year", ["All"] + years)
 
 companies = sorted(df["company_name"].dropna().unique().tolist())
-selected_company = st.sidebar.selectbox(
-    "Company",
-    ["All"] + companies
-)
+selected_company = st.sidebar.selectbox("Company", ["All"] + companies)
 
 search = st.sidebar.text_input("Search Company")
 
@@ -81,9 +72,7 @@ if selected_year != "All":
     filtered = filtered[filtered["year"] == selected_year]
 
 if selected_company != "All":
-    filtered = filtered[
-        filtered["company_name"] == selected_company
-    ]
+    filtered = filtered[filtered["company_name"] == selected_company]
 
 if search:
     filtered = filtered[
@@ -101,22 +90,13 @@ st.subheader(selected)
 
 c1, c2, c3 = st.columns(3)
 
-c1.metric(
-    "Companies",
-    len(filtered)
-)
+c1.metric("Companies", len(filtered))
 
 if "return_on_equity_pct" in filtered.columns:
-    c2.metric(
-        "Average ROE",
-        f"{filtered['return_on_equity_pct'].mean():.2f}%"
-    )
+    c2.metric("Average ROE", f"{filtered['return_on_equity_pct'].mean():.2f}%")
 
 if "debt_to_equity" in filtered.columns:
-    c3.metric(
-        "Average Debt/Equity",
-        f"{filtered['debt_to_equity'].mean():.2f}"
-    )
+    c3.metric("Average Debt/Equity", f"{filtered['debt_to_equity'].mean():.2f}")
 
 st.divider()
 
@@ -129,13 +109,7 @@ left, right = st.columns(2)
 # Top ROE
 if "return_on_equity_pct" in filtered.columns:
 
-    chart_df = (
-        filtered.sort_values(
-            "return_on_equity_pct",
-            ascending=False
-        )
-        .head(10)
-    )
+    chart_df = filtered.sort_values("return_on_equity_pct", ascending=False).head(10)
 
     fig = px.bar(
         chart_df,
@@ -145,10 +119,7 @@ if "return_on_equity_pct" in filtered.columns:
         text_auto=".2f",
     )
 
-    left.plotly_chart(
-        fig,
-        use_container_width=True
-    )
+    left.plotly_chart(fig, use_container_width=True)
 
 # Debt Equity
 if "debt_to_equity" in filtered.columns:
@@ -160,10 +131,7 @@ if "debt_to_equity" in filtered.columns:
         title="Debt to Equity Distribution",
     )
 
-    right.plotly_chart(
-        fig2,
-        use_container_width=True
-    )
+    right.plotly_chart(fig2, use_container_width=True)
 
 # ----------------------------------------
 # Free Cash Flow
@@ -171,13 +139,7 @@ if "debt_to_equity" in filtered.columns:
 
 if "free_cash_flow_cr" in filtered.columns:
 
-    chart_df = (
-        filtered.sort_values(
-            "free_cash_flow_cr",
-            ascending=False
-        )
-        .head(10)
-    )
+    chart_df = filtered.sort_values("free_cash_flow_cr", ascending=False).head(10)
 
     fig3 = px.bar(
         chart_df,
@@ -187,10 +149,7 @@ if "free_cash_flow_cr" in filtered.columns:
         text_auto=".2f",
     )
 
-    st.plotly_chart(
-        fig3,
-        use_container_width=True
-    )
+    st.plotly_chart(fig3, use_container_width=True)
 
 # ----------------------------------------
 # Data Table

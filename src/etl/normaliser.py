@@ -26,9 +26,7 @@ def trim_text(df):
     while preserving missing values.
     """
     for col in df.select_dtypes(include="object"):
-        df[col] = df[col].apply(
-            lambda x: x.strip() if isinstance(x, str) else x
-        )
+        df[col] = df[col].apply(lambda x: x.strip() if isinstance(x, str) else x)
     return df
 
 
@@ -52,7 +50,6 @@ def normalize_year(value):
     if pd.isna(value):
         return None
 
-
     # Handle numeric values
     if isinstance(value, (int, float)):
 
@@ -63,15 +60,10 @@ def normalize_year(value):
 
         return None
 
-
-
     value = str(value).strip()
-
 
     if value == "":
         return None
-
-
 
     # Remove decimal values like 2024.0
 
@@ -83,16 +75,9 @@ def normalize_year(value):
         except ValueError:
             pass
 
-
-
     # Extract digits
 
-    digits = "".join(
-        ch for ch in value
-        if ch.isdigit()
-    )
-
-
+    digits = "".join(ch for ch in value if ch.isdigit())
 
     if len(digits) == 4:
 
@@ -101,20 +86,14 @@ def normalize_year(value):
         if 1900 <= year <= 2100:
             return year
 
-
-
     if len(digits) == 2:
 
         year = int(digits)
 
-        return (
-            2000 + year
-            if year < 50
-            else 1900 + year
-        )
-
+        return 2000 + year if year < 50 else 1900 + year
 
     return None
+
 
 def normalize_ticker(value):
     """

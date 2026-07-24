@@ -23,6 +23,7 @@ def test_operating_profit_margin():
 def test_operating_profit_margin_zero_sales():
     assert operating_profit_margin(250, 0) is None
 
+
 def test_return_on_equity():
     assert return_on_equity(150, 100, 400) == 30.0
 
@@ -53,5 +54,3 @@ def test_check_opm_difference_match():
 
 def test_check_opm_difference_mismatch():
     assert check_opm_difference(30.0, 27.5) is True
-
-

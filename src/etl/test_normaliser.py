@@ -8,10 +8,10 @@ from src.etl.normaliser import (
     normalize_ticker,
 )
 
-
 # ======================================================
 # normalize_columns (5 Tests)
 # ======================================================
+
 
 def test_normalize_columns_spaces():
     df = pd.DataFrame(columns=["Company Name"])
@@ -47,6 +47,7 @@ def test_normalize_columns_multiple():
 # trim_text (5 Tests)
 # ======================================================
 
+
 def test_trim_text_spaces():
     df = pd.DataFrame({"name": ["  TCS  "]})
     df = trim_text(df)
@@ -81,6 +82,7 @@ def test_trim_text_empty():
 # remove_duplicates (5 Tests)
 # ======================================================
 
+
 def test_remove_duplicates_one():
     df = pd.DataFrame({"A": [1, 1]})
     df = remove_duplicates(df)
@@ -106,10 +108,7 @@ def test_remove_duplicates_text():
 
 
 def test_remove_duplicates_multi_column():
-    df = pd.DataFrame({
-        "A": [1, 1],
-        "B": [2, 2]
-    })
+    df = pd.DataFrame({"A": [1, 1], "B": [2, 2]})
     df = remove_duplicates(df)
     assert len(df) == 1
 
@@ -117,6 +116,7 @@ def test_remove_duplicates_multi_column():
 # ======================================================
 # normalize_year (10 Tests)
 # ======================================================
+
 
 def test_year_none():
     assert normalize_year(None) is None
@@ -161,6 +161,7 @@ def test_year_empty():
 # ======================================================
 # normalize_ticker (10 Tests)
 # ======================================================
+
 
 def test_ticker_lower():
     assert normalize_ticker("tcs") == "TCS"

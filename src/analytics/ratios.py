@@ -15,6 +15,7 @@ def net_profit_margin(net_profit, sales):
 
     return (net_profit / sales) * 100
 
+
 def operating_profit_margin(operating_profit, sales):
     """
     Calculate Operating Profit Margin (%)
@@ -31,6 +32,7 @@ def operating_profit_margin(operating_profit, sales):
         return None
 
     return (operating_profit / sales) * 100
+
 
 def return_on_equity(net_profit, equity_capital, reserves):
     """
@@ -50,6 +52,7 @@ def return_on_equity(net_profit, equity_capital, reserves):
         return None
 
     return (net_profit / total_equity) * 100
+
 
 def return_on_capital_employed(
     ebit,

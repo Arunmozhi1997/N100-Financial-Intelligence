@@ -6,6 +6,7 @@ from src.analytics.cashflow_kpis import (
     capital_allocation_pattern,
 )
 
+
 def test_free_cash_flow_positive():
     assert free_cash_flow(500, -200) == 300
 
@@ -80,6 +81,7 @@ def test_fcf_conversion_rate_negative():
 
 def test_fcf_conversion_rate_zero_operating_profit():
     assert fcf_conversion_rate(300, 0) is None
+
 
 def test_reinvestor():
     _, _, _, pattern = capital_allocation_pattern(

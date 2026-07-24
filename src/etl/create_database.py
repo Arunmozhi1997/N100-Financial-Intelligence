@@ -5,7 +5,7 @@ Creates the SQLite database using db/schema.sql
 """
 
 import sqlite3
-from pathlib import Path
+
 
 from src.etl.config import DB_PATH, BASE_DIR
 
