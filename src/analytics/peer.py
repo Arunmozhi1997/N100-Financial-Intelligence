@@ -63,13 +63,27 @@ def create_peer_percentiles_table():
 
 
 def compute_percentiles(peer_groups, financial_ratios):
-    """Merge peer groups and calculate percentile ranks."""
+    """
+    Merge peer groups with financial ratios and calculate
+    yearly percentile ranks within each peer group.
+    """
 
+    # Merge financial data with peer groups
     df = financial_ratios.merge(
         peer_groups,
         on="company_id",
         how="left",
     )
+
+    # Convert year to integer
+    df["year"] = pd.to_numeric(
+        df["year"],
+        errors="coerce",
+    )
+
+    df = df.dropna(subset=["year"])
+
+    df["year"] = df["year"].astype(int)
 
     print("\nMerge Summary")
     print("-" * 40)
@@ -81,7 +95,9 @@ def compute_percentiles(peer_groups, financial_ratios):
     print("-" * 40)
 
     print(
-        df[df["peer_group_name"].isna()]["company_id"]
+        df[
+            df["peer_group_name"].isna()
+        ]["company_id"]
         .drop_duplicates()
         .sort_values()
         .tolist()
@@ -101,16 +117,35 @@ def compute_percentiles(peer_groups, financial_ratios):
         if metric not in df.columns:
             continue
 
+        # Lower Debt-to-Equity is better
         ascending = metric == "debt_to_equity"
 
-        df[f"{metric}_percentile"] = (
-            df.groupby("peer_group_name")[metric]
+        rank = (
+            df.groupby(
+                [
+                    "peer_group_name",
+                    "year",
+                ]
+            )[metric]
             .rank(
-                pct=True,
+                method="min",
                 ascending=ascending,
             )
-            * 100
         )
+
+        total = (
+            df.groupby(
+                [
+                    "peer_group_name",
+                    "year",
+                ]
+            )[metric]
+            .transform("count")
+        )
+
+        df[f"{metric}_percentile"] = (
+            ((total - rank + 1) / total) * 100
+        ).round(2)
 
     print("\nPercentiles Calculated")
     print("-" * 40)
@@ -119,6 +154,7 @@ def compute_percentiles(peer_groups, financial_ratios):
         df[
             [
                 "company_id",
+                "year",
                 "peer_group_name",
                 "return_on_equity_pct",
                 "return_on_equity_pct_percentile",
@@ -127,6 +163,78 @@ def compute_percentiles(peer_groups, financial_ratios):
     )
 
     return df
+
+def save_percentiles(df):
+    """Save percentile results into SQLite."""
+
+    conn = sqlite3.connect(DB_PATH)
+
+    cursor = conn.cursor()
+
+    cursor.execute("DELETE FROM peer_percentiles")
+
+    metrics = [
+        "return_on_equity_pct",
+        "net_profit_margin_pct",
+        "debt_to_equity",
+        "free_cash_flow_cr",
+        "interest_coverage",
+        "asset_turnover",
+    ]
+
+    rows = []
+
+    for _, row in df.iterrows():
+
+        if pd.isna(row["peer_group_name"]):
+            continue
+
+        for metric in metrics:
+
+            percentile_col = f"{metric}_percentile"
+
+            if percentile_col not in df.columns:
+                continue
+
+            value = row.get(metric)
+
+            percentile = row.get(percentile_col)
+
+            if pd.isna(value) or pd.isna(percentile):
+                continue
+
+            rows.append(
+            (
+                row["company_id"],
+                row["peer_group_name"],
+                metric,
+                float(value),
+                float(percentile),
+                int(row["year"]),
+            )
+     )
+
+    cursor.executemany(
+        """
+        INSERT INTO peer_percentiles
+        (
+            company_id,
+            peer_group_name,
+            metric,
+            value,
+            percentile_rank,
+            year
+        )
+        VALUES (?, ?, ?, ?, ?, ?)
+        """,
+        rows,
+    )
+
+    conn.commit()
+
+    print(f"\nInserted {len(rows)} rows into peer_percentiles.")
+
+    conn.close()
 
 
 def create_peer_comparison(df):
@@ -331,9 +439,14 @@ if __name__ == "__main__":
 
     create_peer_percentiles_table()
 
+    # Save all percentile values into SQLite
+    save_percentiles(merged)
+
     success = create_peer_comparison(merged)
 
     if success:
         format_peer_comparison()
         add_summary_rows()
 
+
+    print("\nSprint 3 Peer Analytics Completed Successfully!")
