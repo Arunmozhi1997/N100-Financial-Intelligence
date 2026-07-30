@@ -8,3 +8,5 @@ logs/
 data/processed/
 data/output/
 output/*.xlsx
+db/*.db
+output/*.log
