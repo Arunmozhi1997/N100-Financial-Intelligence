@@ -1,6 +1,6 @@
 # --- Core data handling ---
-pandas==2.2.2
-numpy==1.26.4
+pandas>=2.2.3
+numpy>=2.2.0
 openpyxl==3.1.2
 xlrd==2.0.1
 
@@ -28,7 +28,7 @@ fastapi==0.111.0
 uvicorn==0.30.1
 
 # --- Dashboard (later sprints) ---
-streamlit==1.35.0
+streamlit>=1.49.0
 plotly==5.22.0
 
 # --- Utilities ---
