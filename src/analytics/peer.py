@@ -42,8 +42,7 @@ def create_peer_percentiles_table():
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
 
-    cursor.execute(
-        """
+    cursor.execute("""
         CREATE TABLE IF NOT EXISTS peer_percentiles (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             company_id TEXT,
@@ -53,8 +52,7 @@ def create_peer_percentiles_table():
             percentile_rank REAL,
             year INTEGER
         )
-        """
-    )
+        """)
 
     conn.commit()
     conn.close()
@@ -95,9 +93,7 @@ def compute_percentiles(peer_groups, financial_ratios):
     print("-" * 40)
 
     print(
-        df[
-            df["peer_group_name"].isna()
-        ]["company_id"]
+        df[df["peer_group_name"].isna()]["company_id"]
         .drop_duplicates()
         .sort_values()
         .tolist()
@@ -120,32 +116,26 @@ def compute_percentiles(peer_groups, financial_ratios):
         # Lower Debt-to-Equity is better
         ascending = metric == "debt_to_equity"
 
-        rank = (
-            df.groupby(
-                [
-                    "peer_group_name",
-                    "year",
-                ]
-            )[metric]
-            .rank(
-                method="min",
-                ascending=ascending,
-            )
+        rank = df.groupby(
+            [
+                "peer_group_name",
+                "year",
+            ]
+        )[metric].rank(
+            method="min",
+            ascending=ascending,
         )
 
-        total = (
-            df.groupby(
-                [
-                    "peer_group_name",
-                    "year",
-                ]
-            )[metric]
-            .transform("count")
-        )
+        total = df.groupby(
+            [
+                "peer_group_name",
+                "year",
+            ]
+        )[
+            metric
+        ].transform("count")
 
-        df[f"{metric}_percentile"] = (
-            ((total - rank + 1) / total) * 100
-        ).round(2)
+        df[f"{metric}_percentile"] = (((total - rank + 1) / total) * 100).round(2)
 
     print("\nPercentiles Calculated")
     print("-" * 40)
@@ -163,6 +153,7 @@ def compute_percentiles(peer_groups, financial_ratios):
     )
 
     return df
+
 
 def save_percentiles(df):
     """Save percentile results into SQLite."""
@@ -204,15 +195,15 @@ def save_percentiles(df):
                 continue
 
             rows.append(
-            (
-                row["company_id"],
-                row["peer_group_name"],
-                metric,
-                float(value),
-                float(percentile),
-                int(row["year"]),
+                (
+                    row["company_id"],
+                    row["peer_group_name"],
+                    metric,
+                    float(value),
+                    float(percentile),
+                    int(row["year"]),
+                )
             )
-     )
 
     cursor.executemany(
         """
@@ -258,12 +249,9 @@ def create_peer_comparison(df):
 
         for group in peer_groups:
 
-            group_df = (
-                df[df["peer_group_name"] == group]
-                .sort_values(
-                    by="return_on_equity_pct_percentile",
-                    ascending=False,
-                )
+            group_df = df[df["peer_group_name"] == group].sort_values(
+                by="return_on_equity_pct_percentile",
+                ascending=False,
             )
 
             group_df.to_excel(
@@ -276,6 +264,7 @@ def create_peer_comparison(df):
     print(output_file)
 
     return True
+
 
 def format_peer_comparison():
     """Apply color formatting and highlight benchmark companies."""
@@ -365,6 +354,7 @@ def format_peer_comparison():
     print("\nColor formatting applied.")
     print("Benchmark companies highlighted.")
 
+
 def add_summary_rows():
     """Add median summary row to every peer sheet."""
 
@@ -447,6 +437,5 @@ if __name__ == "__main__":
     if success:
         format_peer_comparison()
         add_summary_rows()
-
 
     print("\nSprint 3 Peer Analytics Completed Successfully!")

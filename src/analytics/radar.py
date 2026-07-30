@@ -141,11 +141,7 @@ def create_radar(company):
 def generate_all_radars(df):
     """Generate radar chart for every company."""
 
-    latest = (
-        df.sort_values("year")
-        .groupby("company_id")
-        .tail(1)
-    )
+    latest = df.sort_values("year").groupby("company_id").tail(1)
 
     print("\nGenerating Radar Charts...")
 

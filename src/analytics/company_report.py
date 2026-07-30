@@ -49,11 +49,7 @@ def company_report(company_id, financial, peer):
     """Display a company analytics report."""
 
     latest = (
-        financial[
-            financial["company_id"] == company_id
-        ]
-        .sort_values("year")
-        .tail(1)
+        financial[financial["company_id"] == company_id].sort_values("year").tail(1)
     )
 
     if latest.empty:
@@ -84,19 +80,12 @@ def company_report(company_id, financial, peer):
 
         value = latest[metric]
 
-        print(
-            f"{metric:<30} : {value:>12.2f}"
-        )
+        print(f"{metric:<30} : {value:>12.2f}")
 
     print("\nPEER PERCENTILES")
     print("-" * 70)
 
-    company_peer = (
-        peer[
-            peer["company_id"] == company_id
-        ]
-        .sort_values("year")
-    )
+    company_peer = peer[peer["company_id"] == company_id].sort_values("year")
 
     if company_peer.empty:
         print("No peer percentile data available.")
@@ -104,9 +93,7 @@ def company_report(company_id, financial, peer):
 
     for metric in metrics:
 
-        row = company_peer[
-            company_peer["metric"] == metric
-        ]
+        row = company_peer[company_peer["metric"] == metric]
 
         if row.empty:
             continue
@@ -115,10 +102,7 @@ def company_report(company_id, financial, peer):
 
         label = performance_label(percentile)
 
-        print(
-            f"{metric:<30} : "
-            f"{percentile:>6.1f}%   {label}"
-        )
+        print(f"{metric:<30} : " f"{percentile:>6.1f}%   {label}")
 
 
 if __name__ == "__main__":
