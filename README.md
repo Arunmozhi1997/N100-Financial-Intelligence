@@ -17,7 +17,7 @@ A comprehensive financial analytics platform for **Nifty 100 companies** built u
 ![Tests](https://img.shields.io/badge/Tests-61%2F61-success)
 
 A comprehensive Financial Analytics Platform for **Nifty 100 companies** built using **Python, SQLite, Streamlit, and Plotly**. The project performs ETL, financial ratio analysis, valuation, peer comparison, stock screening, and interactive dashboard visualization.
->>>>>>> e829ee5 (Improve README with project documentation)
+
 
 ---
 
@@ -489,4 +489,4 @@ https://github.com/Arunmozhi1997
 If you found this project useful, please consider giving it a ⭐ on GitHub.
 
 It helps others discover the project and motivates future improvements.
->>>>>>> e829ee5 (Improve README with project documentation)
+
