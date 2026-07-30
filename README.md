@@ -1,6 +1,6 @@
 # 📊 N100 Financial Intelligence
 
-<<<<<<< HEAD
+
 ## 🌐 Live Demo
 
 https://n100-financial-intelligence-tnkkhqyvgwljdtvfm8reuh.streamlit.app/
@@ -10,7 +10,7 @@ https://n100-financial-intelligence-tnkkhqyvgwljdtvfm8reuh.streamlit.app/
 https://github.com/Arunmozhi1997/N100-Financial-Intelligence
 
 A comprehensive financial analytics platform for **Nifty 100 companies** built using **Python, SQLite, Streamlit, and Plotly**. The project performs ETL, financial ratio analysis, valuation, peer comparison, stock screening, and interactive dashboard visualization.
-=======
+ 
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
 ![Streamlit](https://img.shields.io/badge/Streamlit-Live-red)
 ![SQLite](https://img.shields.io/badge/Database-SQLite-green)
@@ -473,9 +473,7 @@ Automatically generated reports
 
 ### 🌐 LinkedIn
 
-<<<<<<< HEAD
-GitHub: *(https://github.com/Arunmozhi1997/N100-Financial-Intelligence)*
-=======
+
 https://www.linkedin.com/in/arunmozhi-muthu-65a29037b/
 
 ### 💻 GitHub
