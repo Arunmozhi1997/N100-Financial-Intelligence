@@ -1,5 +1,6 @@
 # 📊 N100 Financial Intelligence
 
+<<<<<<< HEAD
 ## 🌐 Live Demo
 
 https://n100-financial-intelligence-tnkkhqyvgwljdtvfm8reuh.streamlit.app/
@@ -9,38 +10,158 @@ https://n100-financial-intelligence-tnkkhqyvgwljdtvfm8reuh.streamlit.app/
 https://github.com/Arunmozhi1997/N100-Financial-Intelligence
 
 A comprehensive financial analytics platform for **Nifty 100 companies** built using **Python, SQLite, Streamlit, and Plotly**. The project performs ETL, financial ratio analysis, valuation, peer comparison, stock screening, and interactive dashboard visualization.
+=======
+![Python](https://img.shields.io/badge/Python-3.11-blue)
+![Streamlit](https://img.shields.io/badge/Streamlit-Live-red)
+![SQLite](https://img.shields.io/badge/Database-SQLite-green)
+![Tests](https://img.shields.io/badge/Tests-61%2F61-success)
+
+A comprehensive Financial Analytics Platform for **Nifty 100 companies** built using **Python, SQLite, Streamlit, and Plotly**. The project performs ETL, financial ratio analysis, valuation, peer comparison, stock screening, and interactive dashboard visualization.
+>>>>>>> e829ee5 (Improve README with project documentation)
 
 ---
 
-# 🚀 Features
+# 🚀 Live Demo
 
-- ETL pipeline for loading and cleaning financial statement data
-- SQLite database for structured financial storage
-- Financial Ratio & KPI calculations
-- CAGR and Cash Flow analysis
-- Valuation analysis
-- Interactive 8-page Streamlit dashboard
-- Financial Screener with CSV export
-- Peer Comparison with Radar Charts
-- Trend Analysis with Year-over-Year Growth
-- Capital Allocation Treemap
-- Annual Report Explorer
-- Automated unit testing using Pytest
+🌐 **https://n100-financial-intelligence-tnkkhqyvgwljdtvfm8reuh.streamlit.app/**
+
+# 📂 GitHub Repository
+
+https://github.com/Arunmozhi1997/N100-Financial-Intelligence
+
+---
+
+# 📑 Table of Contents
+
+- Overview
+- Features
+- Tech Stack
+- Project Architecture
+- Dataset
+- Project Structure
+- Installation
+- Usage
+- Dashboard Pages
+- Screenshots
+- Testing
+- Generated Reports
+- Stock Screeners
+- Project Highlights
+- Skills Demonstrated
+- Future Improvements
+- Author
+
+---
+
+# 📌 Overview
+
+N100 Financial Intelligence is an end-to-end financial analytics platform developed for Nifty 100 companies.
+
+The application automates:
+
+- Financial data processing
+- Financial ratio calculation
+- Company profiling
+- Stock screening
+- Peer comparison
+- Trend analysis
+- Capital allocation visualization
+- Annual report exploration
+
+The final output is an interactive Streamlit dashboard deployed online.
+
+---
+
+# ✨ Features
+
+## 🔄 ETL Pipeline
+
+- Data ingestion
+- Data cleaning
+- Data validation
+- SQLite database loading
+
+## 📈 Financial Analytics
+
+- Financial Ratios
+- CAGR
+- Cash Flow Analysis
+- Valuation Analysis
+- Growth Analysis
+
+## 🔎 Financial Screener
+
+- Multi-factor screening
+- Financial filters
+- CSV Export
+
+## 🤝 Peer Comparison
+
+- Radar Charts
+- Company Comparison
+- Financial Metric Comparison
+
+## 📊 Interactive Dashboard
+
+- Home Dashboard
+- Company Profile
+- Financial Screener
+- Peer Comparison
+- Trend Analysis
+- Capital Allocation
+- Valuation
+- Annual Reports
 
 ---
 
 # 🛠 Tech Stack
 
-- Python 3.11
-- Pandas
-- NumPy
-- SQLite
-- Streamlit
-- Plotly
-- OpenPyXL
-- Pytest
-- Ruff
-- Black
+| Category | Technologies |
+|----------|--------------|
+| Language | Python 3.11 |
+| Database | SQLite |
+| Data Processing | Pandas, NumPy |
+| Dashboard | Streamlit |
+| Visualization | Plotly |
+| Excel | OpenPyXL |
+| Testing | Pytest |
+| Code Quality | Ruff, Black |
+| Version Control | Git & GitHub |
+
+---
+
+# 🏗 Project Architecture
+
+```
+Raw Financial Data
+        │
+        ▼
+   ETL Pipeline
+        │
+        ▼
+ SQLite Database
+        │
+        ▼
+ Financial Analytics Engine
+        │
+        ▼
+ Streamlit Dashboard
+        │
+        ▼
+ Live Web Application
+```
+
+---
+
+# 📊 Dataset
+
+| Item | Value |
+|------|-------|
+| Companies | 92 |
+| Market | Nifty 100 |
+| Database | SQLite |
+| Financial Statements | Profit & Loss, Balance Sheet, Cash Flow |
+| Years | Multi-year Financial Data |
 
 ---
 
@@ -50,7 +171,9 @@ A comprehensive financial analytics platform for **Nifty 100 companies** built u
 N100-Financial-Intelligence
 │
 ├── db/
-│   └── nifty100.db
+│   ├── nifty100.db
+│   ├── schema.sql
+│   └── exploratory_queries.sql
 │
 ├── output/
 │   ├── valuation_summary.xlsx
@@ -66,14 +189,10 @@ N100-Financial-Intelligence
 ├── src/
 │   ├── analytics/
 │   ├── dashboard/
-│   │   ├── app.py
-│   │   ├── pages/
-│   │   └── utils/
 │   ├── etl/
 │   └── screener/
 │
 ├── tests/
-│   └── kpi/
 │
 ├── README.md
 ├── requirements.txt
@@ -87,7 +206,12 @@ N100-Financial-Intelligence
 Clone the repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Arunmozhi1997/N100-Financial-Intelligence.git
+```
+
+Go inside
+
+```bash
 cd N100-Financial-Intelligence
 ```
 
@@ -97,7 +221,7 @@ Create virtual environment
 python -m venv venv
 ```
 
-Activate virtual environment
+Activate
 
 ### Windows
 
@@ -105,7 +229,7 @@ Activate virtual environment
 venv\Scripts\activate
 ```
 
-Install dependencies
+Install packages
 
 ```bash
 pip install -r requirements.txt
@@ -113,39 +237,35 @@ pip install -r requirements.txt
 
 ---
 
-# ▶ Run ETL
+# ▶ Usage
+
+## Run ETL
 
 ```bash
 python -m src.etl.loader
 ```
 
----
-
-# 📈 Run Financial Ratio Engine
+## Run Financial Ratio Engine
 
 ```bash
 python -m src.analytics.ratio_engine
 ```
 
----
-
-# 🔎 Run Stock Screener
+## Run Stock Screener
 
 ```bash
 python -m src.screener.engine
 ```
 
----
-
-# 💻 Run Streamlit Dashboard
+## Run Dashboard
 
 ```bash
 streamlit run src/dashboard/app.py
 ```
 
-Dashboard URL
+Open
 
-```text
+```
 http://localhost:8501
 ```
 
@@ -153,158 +273,126 @@ http://localhost:8501
 
 # 📊 Dashboard Pages
 
-## 🏠 1. Home
+## 🏠 Home
 
-- Nifty 100 market overview
-- KPI cards
-- Sector distribution
-- Top-performing companies
+- Market Overview
+- KPI Cards
+- Sector Distribution
+- Top Companies
 
 ---
 
-## 🏢 2. Company Profile
+## 🏢 Company Profile
 
-- Company overview
+- Company Overview
 - Financial KPIs
-- Revenue & Net Profit trends
-- ROE Trend
+- Revenue Trend
+- Profit Trend
 - Debt Trend
 - Financial Ratios
-- Profit & Loss
 - Pros & Cons
 
 ---
 
-## 🔎 3. Financial Screener
+## 🔎 Financial Screener
 
-- Multi-factor screening
-- Financial filters
-- Live results
-- CSV export
+- Multi-factor Filters
+- Financial Screening
+- CSV Export
 
 ---
 
-## 🤝 4. Peer Comparison
+## 🤝 Peer Comparison
 
-- Company vs Peer analysis
+- Company Comparison
 - Radar Chart
-- Financial comparison table
+- Financial Metrics
 
 ---
 
-## 📈 5. Trend Analysis
+## 📈 Trend Analysis
 
-- Historical financial trends
-- Multi-metric comparison
+- Historical Trends
 - Year-over-Year Growth
-- Interactive line charts
+- Interactive Charts
 
 ---
 
-## 🏦 6. Capital Allocation Map
+## 🏦 Capital Allocation
 
-- Interactive Treemap
-- Capital allocation patterns
-- Pattern-wise company analysis
-
----
-
-## 💰 7. Valuation
-
-- Valuation metrics
-- Discount/Premium analysis
-- Financial multiples
-- Company valuation summary
+- Treemap Visualization
+- Capital Distribution
 
 ---
 
-## 📄 8. Annual Reports
+## 💰 Valuation
 
-- Search reports by company
-- Search reports by year
-- Report availability
-- Report summary
-- Report download links
+- Valuation Metrics
+- Discount/Premium Analysis
+- Financial Multiples
+
+---
+
+## 📄 Annual Reports
+
+- Search by Company
+- Search by Year
+- Report Availability
 
 ---
 
 # 📸 Dashboard Screenshots
 
-> Save screenshots inside:
+Create folder
 
 ```
 docs/screenshots/
 ```
 
-### Home
+Add screenshots
+
+```
+home.png
+profile.png
+screener.png
+peers.png
+trends.png
+capital.png
+valuation.png
+reports.png
+```
+
+Example
 
 ```markdown
+## Home
+
 ![Home](docs/screenshots/home.png)
-```
-
-### Company Profile
-
-```markdown
-![Profile](docs/screenshots/profile.png)
-```
-
-### Financial Screener
-
-```markdown
-![Screener](docs/screenshots/screener.png)
-```
-
-### Peer Comparison
-
-```markdown
-![Peers](docs/screenshots/peers.png)
-```
-
-### Trend Analysis
-
-```markdown
-![Trends](docs/screenshots/trends.png)
-```
-
-### Capital Allocation
-
-```markdown
-![Capital](docs/screenshots/capital.png)
-```
-
-### Valuation
-
-```markdown
-![Valuation](docs/screenshots/valuation.png)
-```
-
-### Annual Reports
-
-```markdown
-![Reports](docs/screenshots/reports.png)
 ```
 
 ---
 
 # 🧪 Testing
 
-Run all tests
+Run tests
 
 ```bash
 pytest
 ```
 
-Current Status
+## Test Status
 
-- ✅ 61/61 Unit Tests Passed
-- ✅ Ruff Checks Passed
-- ✅ Black Formatting Passed
+✅ 61 / 61 Tests Passed
+
+✅ Ruff Checks Passed
+
+✅ Black Formatting Passed
 
 ---
 
 # 📄 Generated Reports
 
-The project automatically generates
+Automatically generated reports
 
 - valuation_summary.xlsx
 - valuation_flags.csv
@@ -331,37 +419,74 @@ The project automatically generates
 
 # 🏆 Project Highlights
 
-- 92 Nifty 100 companies analyzed
-- Interactive 8-page Streamlit dashboard
-- SQLite financial database
-- Financial ratio engine
-- Valuation analysis
-- Peer comparison
-- Trend analysis
-- Capital allocation visualization
-- Annual report explorer
-- CSV & Excel export
-- 61/61 automated tests passed
+- ✅ 92 Nifty 100 Companies
+- ✅ SQLite Database
+- ✅ ETL Pipeline
+- ✅ Financial Ratio Engine
+- ✅ Valuation Analysis
+- ✅ Peer Comparison
+- ✅ Financial Screener
+- ✅ Trend Analysis
+- ✅ Capital Allocation
+- ✅ Annual Report Explorer
+- ✅ Interactive 8-Page Dashboard
+- ✅ Live Streamlit Deployment
+- ✅ 61/61 Automated Tests Passed
+
+---
+
+# 💡 Skills Demonstrated
+
+- ETL Development
+- Data Cleaning
+- Data Validation
+- SQL
+- SQLite
+- Financial Analytics
+- Data Visualization
+- Streamlit
+- Plotly
+- Python
+- Git & GitHub
+- Software Testing
+- Dashboard Development
 
 ---
 
 # 🔮 Future Improvements
 
-- Portfolio tracking
-- Watchlist functionality
-- AI-powered financial insights
-- Real-time stock price integration
-- Cloud deployment (AWS/Azure)
-- User authentication
+- Portfolio Tracker
+- User Authentication
+- Real-Time Stock Prices
+- AI Financial Insights
+- Portfolio Optimization
+- Docker Deployment
+- CI/CD Pipeline
 
 ---
 
 # 👨‍💻 Author
 
-**Arunmozhi M**
+## Arunmozhi M
 
 **Data Analyst | Python | SQL | Financial Analytics | Streamlit | Machine Learning**
 
-LinkedIn: *(https://www.linkedin.com/in/arunmozhi-muthu-65a29037b/)*
+### 🌐 LinkedIn
 
+<<<<<<< HEAD
 GitHub: *(https://github.com/Arunmozhi1997/N100-Financial-Intelligence)*
+=======
+https://www.linkedin.com/in/arunmozhi-muthu-65a29037b/
+
+### 💻 GitHub
+
+https://github.com/Arunmozhi1997
+
+---
+
+# ⭐ Support
+
+If you found this project useful, please consider giving it a ⭐ on GitHub.
+
+It helps others discover the project and motivates future improvements.
+>>>>>>> e829ee5 (Improve README with project documentation)
