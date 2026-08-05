@@ -1,13 +1,17 @@
 # 📊 N100 Financial Intelligence
 
 
-## 🌐 Live Demo
+An end-to-end financial analytics platform for **Nifty 100 companies** built using **Python, SQLite, Streamlit, Plotly, and ReportLab**.
 
-https://n100-financial-intelligence-tnkkhqyvgwljdtvfm8reuh.streamlit.app/
+## 🚀 Highlights
 
-## 📂 GitHub Repository
+- 📈 Analyze **92 Nifty 100 companies**
+- 📊 Interactive **8-page Streamlit Dashboard**
+- 📄 Auto-generated Company & Sector PDF Reports
+- 🤖 NLP-powered Financial Pros & Cons Generator
+- 💰 Valuation, Cash Flow & Capital Allocation Intelligence
+- ✅ 61/61 Automated Tests Passing
 
-https://github.com/Arunmozhi1997/N100-Financial-Intelligence
 
 A comprehensive financial analytics platform for **Nifty 100 companies** built using **Python, SQLite, Streamlit, and Plotly**. The project performs ETL, financial ratio analysis, valuation, peer comparison, stock screening, and interactive dashboard visualization.
  
@@ -76,30 +80,62 @@ The final output is an interactive Streamlit dashboard deployed online.
 
 ## 🔄 ETL Pipeline
 
-- Data ingestion
-- Data cleaning
-- Data validation
-- SQLite database loading
+- Automated Data Ingestion
+- Data Cleaning & Validation
+- SQLite Database Loading
+- Financial Statement Processing
+
+---
 
 ## 📈 Financial Analytics
 
-- Financial Ratios
-- CAGR
-- Cash Flow Analysis
+- Financial Ratio Engine
+- CAGR Analysis
 - Valuation Analysis
+- Cash Flow Intelligence
+- Capital Allocation Analysis
 - Growth Analysis
+- Quality Score Calculation
+
+---
+
+## 🤖 NLP Engine
+
+- Financial Text Parser
+- Automatic Pros & Cons Generation
+- Confidence Scoring
+- Rule-Based Financial Insights
+
+---
 
 ## 🔎 Financial Screener
 
-- Multi-factor screening
-- Financial filters
+- Multi-factor Screening
+- Quality Compounders
+- Value Picks
+- Dividend Champions
+- Growth Accelerators
 - CSV Export
+
+---
 
 ## 🤝 Peer Comparison
 
 - Radar Charts
 - Company Comparison
 - Financial Metric Comparison
+- Industry Benchmarking
+
+---
+
+## 📄 Report Generation
+
+- Company Tearsheets (PDF)
+- Sector Reports (PDF)
+- Portfolio Summary Report
+- Financial Health Dashboard
+
+---
 
 ## 📊 Interactive Dashboard
 
@@ -127,6 +163,25 @@ The final output is an interactive Streamlit dashboard deployed online.
 | Testing | Pytest |
 | Code Quality | Ruff, Black |
 | Version Control | Git & GitHub |
+
+---
+
+# 📊 Project Statistics
+
+| Metric | Value |
+|---------|------:|
+| Companies Analyzed | 92 |
+| Sectors Covered | 10 |
+| Dashboard Pages | 8 |
+| PDF Company Tearsheets | 92 |
+| Sector Reports | 10 |
+| Portfolio Summary | 1 |
+| SQLite Database | 20+ Tables |
+| Financial KPIs | 100+ |
+| Automated Tests | 61 / 61 ✅ |
+| Technologies Used | Python, SQLite, Streamlit, Plotly, ReportLab |
+
+---
 
 ---
 
@@ -177,25 +232,29 @@ N100-Financial-Intelligence
 │
 ├── output/
 │   ├── valuation_summary.xlsx
-│   ├── valuation_flags.csv
-│   ├── quality_compounder.xlsx
-│   ├── value_pick.xlsx
-│   ├── growth_accelerator.xlsx
-│   ├── dividend_champion.xlsx
-│   ├── debt_free_blue_chip.xlsx
-│   ├── turnaround_watch.xlsx
-│   └── screener_output.xlsx
+│   ├── cashflow_intelligence.xlsx
+│   ├── screener_output.xlsx
+│   ├── pros_cons_generated.csv
+│   ├── analysis_parsed.csv
+│   └── ...
+│
+├── reports/
+│   ├── tearsheets/
+│   ├── sector/
+│   └── portfolio/
 │
 ├── src/
 │   ├── analytics/
 │   ├── dashboard/
 │   ├── etl/
+│   ├── nlp/
+│   ├── reports/
 │   └── screener/
 │
 ├── tests/
 │
-├── README.md
 ├── requirements.txt
+├── README.md
 └── pytest.ini
 ```
 
@@ -341,34 +400,53 @@ http://localhost:8501
 
 ---
 
-# 📸 Dashboard Screenshots
+# 📸 Dashboard Preview
 
-Create folder
+## 🏠 Home Dashboard
 
-```
-docs/screenshots/
-```
+![Home](screenshots/home.png)
 
-Add screenshots
+---
 
-```
-home.png
-profile.png
-screener.png
-peers.png
-trends.png
-capital.png
-valuation.png
-reports.png
-```
+## 🏢 Company Profile
 
-Example
+![Company Profile](screenshots/profile.png)
 
-```markdown
-## Home
+---
 
-![Home](docs/screenshots/home.png)
-```
+## 🔎 Financial Screener
+
+![Financial Screener](screenshots/screener.png)
+
+---
+
+## 🤝 Peer Comparison
+
+![Peer Comparison](screenshots/peers.png)
+
+---
+
+## 📈 Trend Analysis
+
+![Trend Analysis](screenshots/trends.png)
+
+---
+
+## 🏦 Capital Allocation
+
+![Capital Allocation](screenshots/capital.png)
+
+---
+
+## 💰 Valuation
+
+![Valuation](screenshots/valuation.png)
+
+---
+
+## 📄 Annual Reports
+
+![Annual Reports](screenshots/reports.png)```
 
 ---
 
@@ -419,49 +497,80 @@ Automatically generated reports
 
 # 🏆 Project Highlights
 
-- ✅ 92 Nifty 100 Companies
-- ✅ SQLite Database
-- ✅ ETL Pipeline
+- ✅ End-to-End Financial Analytics Platform
+- ✅ 92 Nifty 100 Companies Analyzed
+- ✅ Automated ETL Pipeline
+- ✅ SQLite Data Warehouse
 - ✅ Financial Ratio Engine
-- ✅ Valuation Analysis
-- ✅ Peer Comparison
-- ✅ Financial Screener
-- ✅ Trend Analysis
-- ✅ Capital Allocation
-- ✅ Annual Report Explorer
-- ✅ Interactive 8-Page Dashboard
-- ✅ Live Streamlit Deployment
-- ✅ 61/61 Automated Tests Passed
+- ✅ Cash Flow Intelligence Module
+- ✅ NLP-based Financial Pros & Cons Generator
+- ✅ Capital Allocation Analysis
+- ✅ Interactive 8-Page Streamlit Dashboard
+- ✅ 92 Company Tearsheets (PDF)
+- ✅ 10 Sector Reports (PDF)
+- ✅ Portfolio Summary Report
+- ✅ 61 / 61 Automated Tests Passed
+- ✅ Live Cloud Deployment on Streamlit
 
 ---
 
 # 💡 Skills Demonstrated
 
-- ETL Development
+### Programming
+
+- Python
+- SQL
+- Object-Oriented Programming
+
+### Data Engineering
+
+- ETL Pipeline
 - Data Cleaning
 - Data Validation
-- SQL
-- SQLite
-- Financial Analytics
-- Data Visualization
+- SQLite Database Design
+
+### Financial Analytics
+
+- Financial Statement Analysis
+- Ratio Analysis
+- CAGR Analysis
+- Valuation
+- Cash Flow Intelligence
+- Capital Allocation Analysis
+
+### Data Visualization
+
 - Streamlit
 - Plotly
-- Python
+- Interactive Dashboards
+- ReportLab PDF Reports
+
+### Software Engineering
+
 - Git & GitHub
-- Software Testing
-- Dashboard Development
+- Automated Testing (Pytest)
+- Code Formatting (Black)
+- Linting (Ruff)
+
+### NLP
+
+- Regex Parsing
+- Rule-Based Text Generation
+- Confidence Scoring
 
 ---
 
-# 🔮 Future Improvements
+# 🔮 Future Roadmap
 
-- Portfolio Tracker
-- User Authentication
-- Real-Time Stock Prices
-- AI Financial Insights
-- Portfolio Optimization
-- Docker Deployment
-- CI/CD Pipeline
+- 📈 Real-Time Stock Price Integration
+- 🤖 AI-powered Financial Insights using LLMs
+- 📊 Portfolio Performance Tracker
+- 📉 Risk & Volatility Analytics
+- 🔐 User Authentication
+- 🌍 REST API
+- 🐳 Docker Deployment
+- ⚙️ CI/CD Pipeline with GitHub Actions
+- ☁️ Cloud Database Integration
 
 ---
 
@@ -469,10 +578,9 @@ Automatically generated reports
 
 ## Arunmozhi M
 
-**Data Analyst | Python | SQL | Financial Analytics | Streamlit | Machine Learning**
+**Data Analyst | Financial Analytics | Python Developer | SQL | Streamlit | Machine Learning**
 
-### 🌐 LinkedIn
-
+### 🔗 LinkedIn
 
 https://www.linkedin.com/in/arunmozhi-muthu-65a29037b/
 
@@ -482,9 +590,5 @@ https://github.com/Arunmozhi1997
 
 ---
 
-# ⭐ Support
-
-If you found this project useful, please consider giving it a ⭐ on GitHub.
-
-It helps others discover the project and motivates future improvements.
+⭐ If you found this project useful, consider giving it a **Star** on GitHub!
 
